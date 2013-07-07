@@ -1,0 +1,23 @@
+GIT
+  remote: https://github.com/NUBIC/lunokhod.git
+  revision: 4ff7771ce07a8afdb21fad36970b64c6c2b8c2e3
+  specs:
+    lunokhod (0.0.1)
+      case
+      uuidtools
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    case (0.5.2.1)
+    ncs_mdes (0.13.0)
+      nokogiri (~> 1.5.7)
+    nokogiri (1.5.10)
+    uuidtools (2.1.4)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  lunokhod!
+  ncs_mdes
