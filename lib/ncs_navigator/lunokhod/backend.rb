@@ -107,32 +107,9 @@ module NcsNavigator::Lunokhod
         #   foo=1&foo=2
         #
         # The interpretation of this is up to the application server.  To
-        # eliminate this ambiguity, we assign the input field the name.  For
-        # pick-ones, we additionally generate a bit of Javascript that brings
-        # back the radio-button behavior.
+        # eliminate this ambiguity, we assign the input field the name.
         input_classes = ["lunokhod-entry"].join(' ')
         e %Q{<input id="#{n.uuid}" class="#{selector_classes}" type="#{input_type}" data-name="#{name}"></input>}
-
-        if q.pick == :one
-          e %Q{<script type="text/javascript">
-                $(function () {
-                  $("##{n.uuid}").change(function () {
-                    var name = $(this).data('name');
-
-                    if ($(this).prop('checked')) {
-                      $('input[name="#{name}"]').prop('checked', false);
-                    }
-                  });
-
-                  $('input[name="#{name}"]').change(function () {
-                    if ($(this).prop('checked')) {
-                      $('##{n.uuid}').prop('checked', false);
-                    }
-                  });
-                });
-              </script>
-          }
-        end
 
         case n.type
         when :string
@@ -151,27 +128,6 @@ module NcsNavigator::Lunokhod
       yield
 
       e %q{</li>}
-    end
-
-    def dependency(n)
-      e %q{<script type="text/javascript">}
-      yield
-      e %q{</script>}
-    end
-
-    def condition(n)
-      case n.parsed_condition
-      when Lunokhod::ConditionParsing::AnswerSelected
-        e %q{// AnswerSelected}
-      when Lunokhod::ConditionParsing::AnswerCount
-        e %q{// AnswerCount}
-      when Lunokhod::ConditionParsing::AnswerSatisfies
-        e %q{// AnswerSatisfies}
-      when Lunokhod::ConditionParsing::SelfAnswerSatisfies
-        e %q{// SelfAnswerSatisfies}
-      end
-
-      yield
     end
 
     def write
