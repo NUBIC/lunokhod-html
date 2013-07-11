@@ -18,6 +18,11 @@ module NcsNavigator::Lunokhod
       @label = template('label.html.erb')
       @question = template('question.html.erb')
       @answer = template('answer.html.erb')
+      @grid = template('grid.html.erb')
+
+      @in_grid = false
+      @grid_as = []
+      @grid_qs = []
     end
 
     def prologue
@@ -62,34 +67,46 @@ module NcsNavigator::Lunokhod
     end
     
     def question(n)
-      start, finish = split_output @question.result(binding)
-      e start
-      yield
-      e finish
+      if @in_grid
+        # Queue up the question for later processing by the grid generator
+        @grid_qs << n
+        yield
+      else
+        start, finish = split_output @question.result(binding)
+        e start
+        yield
+        e finish
+      end
     end
 
     def answer(n)
-      q = n.parent
-      dei = q.options[:data_export_identifier]
-
-      selector_type, name = if q.pick == :any
-                              ['checkbox', "#{dei}[]"]
-                            else
-                              ['radio', dei]
-                            end
-
-      value = n.tag
-
-      if value.start_with?('neg_')
-        value.sub!('neg_', '-')
+      if @in_grid
+        # Queue up the answer for later processing by the grid generator
+        @grid_as << n
+        yield
+      else
+        q = n.question
+        start, finish = split_output @answer.result(binding)
+        e start
+        yield
+        e finish
       end
-
-      start, finish = split_output @answer.result(binding)
-      e start
-      yield
-      e finish
     end
 
+    def grid(n)
+      begin
+        @in_grid = true
+        @grid_as.clear
+        @grid_qs.clear
+
+        yield
+
+        e @grid.result(binding)
+      ensure
+        @in_grid = false
+      end
+    end
+    
     def write
       puts @buffer
     end

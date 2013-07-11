@@ -1,0 +1,28 @@
+<li class="lunokhod-question">
+  <table class="lunokhod-grid">
+    <thead>
+      <tr>
+        <th>
+          <%=h n.text %>&hellip;
+        </th>
+        <% @grid_as.each do |a| %>
+          <th>
+            <span class="lunokhod-label-text"><%=h a.text %></span>
+          </th>
+        <% end %>
+      </tr>
+    </thead>
+    <tbody>
+      <% @grid_qs.each do |q| %>
+        <tr>
+          <td><%=h q.text %></td>
+          <% @grid_as.each do |a| %>
+            <td>
+              <input class="lunokhod-answer-select" type="<%=h q.selector_type %>" name="<%=h q.name %>" value="<%=h a.value %>"></input>
+            </td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</li>
