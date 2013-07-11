@@ -1,0 +1,19 @@
+<li class="lunokhod-answer">
+  <label>
+    <% if n.choice? %>
+      <input class="lunokhod-answer-select" type="<%=h selector_type %>" name="<%=h name %>" value="<%=h value %>"></input>
+      <span class="lunokhod-answer-text"><%=h n.text %></span>
+    <% else %>
+      <input class="lunokhod-answer-select" type="<%=h selector_type %>" data-name="<%=h name %>"></input>
+
+      <% if n.type == :string %>
+        <input class="lunokhod-entry" type="text" name="<%=h name %>"></input>
+      <% elsif n.type == :time %>
+        <input class="lunokhod-entry" type="time" name="<%=h name %>"></input>
+      <% elsif n.type == :datetime %>
+        <input class="lunokhod-entry" type="datetime" name="<%=h name %>"></input>
+      <% end %>
+    <% end %>
+  </label>
+  %DATA%
+</li>

@@ -10,6 +10,7 @@ GEM
   remote: https://rubygems.org/
   specs:
     case (0.5.2.1)
+    escape_utils (0.3.2)
     ncs_mdes (0.13.0)
       nokogiri (~> 1.5.7)
     nokogiri (1.5.10)
@@ -19,5 +20,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  escape_utils
   lunokhod!
   ncs_mdes
