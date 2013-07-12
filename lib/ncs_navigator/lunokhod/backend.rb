@@ -21,9 +21,13 @@ module NcsNavigator::Lunokhod
       @section = template('section.html.erb')
       @survey = template('survey.html.erb')
 
+      @question_object = template('question_object.js.erb')
+
       @in_grid = false
       @grid_as = []
       @grid_qs = []
+
+      @question_objects = []
     end
 
     def prologue
@@ -35,6 +39,10 @@ module NcsNavigator::Lunokhod
 
     def epilogue
       total = Time.now - @start
+
+      question_object_defs = @question_objects.map do |q| 
+        @question_object.result(binding)
+      end
 
       e @epilogue.result(binding)
     end
@@ -78,6 +86,8 @@ module NcsNavigator::Lunokhod
         yield
         e finish
       end
+
+      @question_objects << n
     end
 
     def answer(n)

@@ -1,0 +1,19 @@
+<% dependency_names = q.dependencies.map { |dep| "d#{dep.uuid.hexdigest}" } %>
+
+Lunokhod.Question<%= q.uuid.hexdigest %> = Ember.Object.extend({
+  isActive: function () {
+    <% if dependency_names.empty? %>
+    return true;
+    <% else %>
+    return <%= dependency_names.map { |n| "this.get('#{n}')" }.join(' && ') %>;
+    <% end %>
+  }.property(<%= dependency_names.map { |n| %Q{"#{n}"} }.join(', ') %>),
+
+  <% q.dependencies.each do |dep| %>
+    <% conditions = dep.referenced_conditions.map { |name| %Q{"c#{name}"} }.join(',') %>
+    d<%= dep.uuid.hexdigest %>: function () {
+    }.property(<%= conditions %>),
+  <% end %>
+
+  _e: 0
+});
