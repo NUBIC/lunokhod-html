@@ -14,6 +14,8 @@
         <input class="lunokhod-entry" type="time" name="<%=h q.name %>"></input>
       <% elsif n.type == :datetime %>
         <input class="lunokhod-entry" type="datetime" name="<%=h q.name %>"></input>
+      <% elsif n.type == :integer %>
+        <input class="lunokhod-entry" type="number" name="<%=h q.name %>"></input>
       <% end %>
     <% end %>
   </label>
