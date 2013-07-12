@@ -10,15 +10,16 @@ module NcsNavigator::Lunokhod
     attr_accessor :level
 
     def initialize
-      @prologue = template('prologue.html.erb')
+      @answer = template('answer.html.erb')
       @epilogue = template('epilogue.html.erb')
-      @survey = template('survey.html.erb')
-      @section = template('section.html.erb')
+      @grid = template('grid.html.erb')
       @group = template('group.html.erb')
       @label = template('label.html.erb')
+      @prologue = template('prologue.html.erb')
       @question = template('question.html.erb')
-      @answer = template('answer.html.erb')
-      @grid = template('grid.html.erb')
+      @repeater = template('repeater.html.erb')
+      @section = template('section.html.erb')
+      @survey = template('survey.html.erb')
 
       @in_grid = false
       @grid_as = []
@@ -105,6 +106,13 @@ module NcsNavigator::Lunokhod
       ensure
         @in_grid = false
       end
+    end
+
+    def repeater(n)
+      start, finish = split_output @repeater.result(binding)
+      e start
+      yield
+      e finish
     end
     
     def write
