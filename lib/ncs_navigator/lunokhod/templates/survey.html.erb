@@ -1,8 +1,10 @@
-<article>
-  <header>
-    <h1><%=h n.name %></h1>
-  </header>
-  <form>
-    %DATA%
-  </form>
-</article>
+<script type="text/javascript">
+  var survey = Lunokhod.Survey.create({
+    title: "<%= n.name %>",
+    questions: []
+  });
+
+  Lunokhod.set('survey', survey);
+
+  %%DATA%%
+</script>

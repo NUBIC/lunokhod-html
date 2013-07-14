@@ -8,3 +8,21 @@
     <script src="javascripts/ember.js"></script>
   </head>
   <body>
+    <script type="text/javascript">
+      window.Lunokhod = Ember.Application.create();
+
+      window.Lunokhod.Survey = Ember.Object.extend({
+      });
+
+      Lunokhod.ApplicationController = Ember.ObjectController.extend({
+        contentBinding: 'Lunokhod.survey'
+      });
+    </script>
+    <script type="text/x-handlebars">
+      <article class="lunokhod-survey">
+        <header>
+          <h1>{{title}}</h1>
+        </header>
+        {{outlet}}
+      </article>
+    </script>
