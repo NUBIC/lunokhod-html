@@ -1,10 +1,10 @@
 <script type="text/javascript">
-  var survey = Lunokhod.Survey.create({
+  var <%= n.varname %> = Lunokhod.Survey.create({
     title: "<%= n.name %>",
     sections: []
   });
 
-  Lunokhod.set('survey', survey);
+  Lunokhod.set('survey', <%= n.varname %>);
 
   %%DATA%%
 </script>

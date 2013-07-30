@@ -12,22 +12,18 @@
       window.Lunokhod = Ember.Application.create();
 
       window.Lunokhod.Survey = Ember.Object.extend({
-        getSectionByUuid: function(uuid) {
-          var sections = this.get('sections');
-
-          if (sections) {
-            for(var i = 0; i < sections.length; ++i) {
-              if (sections[i].get('uuid') === uuid) {
-                return sections[i];
-              }
-            }
-          }
-
-          return null;
+        addSection: function(section) {
+          this.get('sections').pushObject(section);
         }
       });
 
       window.Lunokhod.Section = Ember.Object.extend({
+        addSection: function(section) {
+          this.get('sections').pushObject(section);
+        }
+      });
+
+      window.Lunokhod.Group = Ember.Object.extend({
       });
 
       window.Lunokhod.Question = Ember.Object.extend({

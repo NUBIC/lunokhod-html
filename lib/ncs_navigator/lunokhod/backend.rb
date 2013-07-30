@@ -14,6 +14,7 @@ module NcsNavigator::Lunokhod
       @survey = template('survey.html.erb')
       @section = template('section.js.erb')
       @question = template('question.js.erb')
+      @group = template('group.js.erb')
     end
 
     def prologue
@@ -37,6 +38,13 @@ module NcsNavigator::Lunokhod
 
     def section(n)
       start, finish = @section.result(binding).split('%%DATA%%')
+      e start
+      yield
+      e finish
+    end
+
+    def group(n)
+      start, finish = @group.result(binding).split('%%DATA%%')
       e start
       yield
       e finish

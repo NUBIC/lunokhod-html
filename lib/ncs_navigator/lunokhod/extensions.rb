@@ -6,7 +6,6 @@ module NcsNavigator::Lunokhod
       'v' + uuid.to_s.gsub('-', '')
     end
   end
-
 end
 
 Lunokhod::Ast.constants.each do |c|
