@@ -1,0 +1,15 @@
+var <%= n.varname %> = Lunokhod.Question.create({
+  uuid: "<%= n.uuid %>",
+  text: "<%= n.text %>",
+  answers: []
+});
+
+%%DATA%%
+
+var parent = Lunokhod.get('survey').getSectionByUuid("<%= n.parent.uuid %>");
+
+if (parent) {
+  parent.get('questions').pushObject(<%= n.varname %>);
+} else {
+  console.log("Unable to find question parent with UUID <%= n.parent.uuid %>");
+}

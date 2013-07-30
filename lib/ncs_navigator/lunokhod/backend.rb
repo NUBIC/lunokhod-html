@@ -12,6 +12,8 @@ module NcsNavigator::Lunokhod
       @prologue = template('prologue.html.erb')
       @epilogue = template('epilogue.html.erb')
       @survey = template('survey.html.erb')
+      @section = template('section.js.erb')
+      @question = template('question.js.erb')
     end
 
     def prologue
@@ -27,8 +29,24 @@ module NcsNavigator::Lunokhod
     end
 
     def survey(n)
-      e @survey.result(binding)
+      start, finish = @survey.result(binding).split('%%DATA%%')
+      e start
       yield
+      e finish
+    end
+
+    def section(n)
+      start, finish = @section.result(binding).split('%%DATA%%')
+      e start
+      yield
+      e finish
+    end
+
+    def question(n)
+      start, finish = @question.result(binding).split('%%DATA%%')
+      e start
+      yield
+      e finish
     end
     
     def write
@@ -37,7 +55,7 @@ module NcsNavigator::Lunokhod
 
     def method_missing(m, *args)
       if args.first.respond_to?(:uuid)
-        e "<!-- #{m} #{args.first.uuid} -->"
+        e "// #{m} #{args.first.uuid}"
         yield if block_given?
       else
         super

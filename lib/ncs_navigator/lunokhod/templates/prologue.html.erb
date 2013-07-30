@@ -12,6 +12,25 @@
       window.Lunokhod = Ember.Application.create();
 
       window.Lunokhod.Survey = Ember.Object.extend({
+        getSectionByUuid: function(uuid) {
+          var sections = this.get('sections');
+
+          if (sections) {
+            for(var i = 0; i < sections.length; ++i) {
+              if (sections[i].get('uuid') === uuid) {
+                return sections[i];
+              }
+            }
+          }
+
+          return null;
+        }
+      });
+
+      window.Lunokhod.Section = Ember.Object.extend({
+      });
+
+      window.Lunokhod.Question = Ember.Object.extend({
       });
 
       Lunokhod.ApplicationController = Ember.ObjectController.extend({
@@ -23,6 +42,14 @@
         <header>
           <h1>{{title}}</h1>
         </header>
-        {{outlet}}
+        {{#each section in sections}}
+          <section class="lunokhod-section">
+            <header>
+              <h1>{{section.title}}</h1>
+            </header>
+            <ol>
+            </ol>
+          </section>
+        {{/each}}
       </article>
     </script>

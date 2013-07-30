@@ -1,0 +1,9 @@
+var <%= n.varname %> = Lunokhod.Section.create({
+  uuid: "<%= n.uuid %>",
+  title: "<%= n.name %>",
+  questions: []
+});
+
+Lunokhod.get('survey.sections').pushObject(<%= n.varname %>);
+
+%%DATA%%
