@@ -6,4 +6,4 @@ var <%= n.varname %> = Lunokhod.Question.create({
 
 %%DATA%%
 
-<%= n.parent.varname %>.get('questions').pushObject(<%= n.varname %>);
+<%= n.parent.varname %>.addQuestion(<%= n.varname %>);
