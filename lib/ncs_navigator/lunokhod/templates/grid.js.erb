@@ -1,0 +1,10 @@
+var <%= n.varname %> = Lunokhod.Grid.create({
+  uuid: "<%= n.uuid %>",
+  text: "<%= n.text %>",
+  questions: [],
+  answers: []
+});
+
+%%DATA%%
+
+<%= n.parent.varname %>.addQuestion(<%= n.varname %>);

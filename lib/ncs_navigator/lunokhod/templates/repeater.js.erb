@@ -1,0 +1,10 @@
+var <%= n.varname %> = Lunokhod.Repeater.create({
+  uuid: "<%= n.uuid %>",
+  text: "<%= n.text %>",
+  sections: [],
+  questions: []
+});
+
+%%DATA%%
+
+<%= n.parent.varname %>.addSection(<%= n.varname %>);

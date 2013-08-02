@@ -11,10 +11,12 @@ module NcsNavigator::Lunokhod
       @buffer = ""
       @prologue = template('prologue.html.erb')
       @epilogue = template('epilogue.html.erb')
-      @survey = template('survey.html.erb')
-      @section = template('section.js.erb')
-      @question = template('question.js.erb')
+      @grid = template('grid.js.erb')
       @group = template('group.js.erb')
+      @question = template('question.js.erb')
+      @repeater = template('repeater.js.erb')
+      @section = template('section.js.erb')
+      @survey = template('survey.html.erb')
     end
 
     def prologue
@@ -52,6 +54,20 @@ module NcsNavigator::Lunokhod
 
     def question(n)
       start, finish = @question.result(binding).split('%%DATA%%')
+      e start
+      yield
+      e finish
+    end
+
+    def grid(n)
+      start, finish = @grid.result(binding).split('%%DATA%%')
+      e start
+      yield
+      e finish
+    end
+
+    def repeater(n)
+      start, finish = @repeater.result(binding).split('%%DATA%%')
       e start
       yield
       e finish
