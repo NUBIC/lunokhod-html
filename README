@@ -1,0 +1,10 @@
+lunokhod-html
+-------------
+
+A backend for Lunokhod[1] that generates HTML/JS webapps (fine, web
+pages) from surveys written in Lunokhod's DSL.
+
+Under heavy development; subject to demolition and rebirth.  Don't use
+this until this is stable.
+
+Or just know that you'll have to stay on your toes.
