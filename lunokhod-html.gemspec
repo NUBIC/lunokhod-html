@@ -21,5 +21,8 @@ Gem::Specification.new do |spec|
   spec.add_dependency "babosa"
   spec.add_dependency "lunokhod"
   spec.add_development_dependency "bundler", "~> 1.3"
+  spec.add_development_dependency "capybara"
+  spec.add_development_dependency "cucumber"
   spec.add_development_dependency "rake"
+  spec.add_development_dependency "selenium-webdriver"
 end
