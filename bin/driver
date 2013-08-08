@@ -6,9 +6,10 @@ require 'lunokhod'
 require 'lunokhod/html'
 
 file = ARGV[0]
+output_dir = ARGV[1]
 
-if !file
-  puts "Usage: #$0 SURVEY"
+if !file || !output_dir
+  puts "Usage: #$0 FILE OUTPUT_DIR"
   exit 1
 end
 
@@ -29,7 +30,7 @@ end
 r = Lunokhod::Resolver.new(p.surveys)
 r.run
 
-b = Lunokhod::Html::Backend.new
+b = Lunokhod::Html::Backend.new(output_dir)
 c = Lunokhod::Compiler.new(p.surveys, b)
 c.compile
 b.write
