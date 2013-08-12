@@ -6,3 +6,4 @@ module Lunokhod
 end
 
 require "lunokhod/html/backend"
+require "lunokhod/html/driver"

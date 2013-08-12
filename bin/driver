@@ -13,24 +13,11 @@ if !file || !output_dir
   exit 1
 end
 
-data = File.read(file)
+driver = Lunokhod::Html::Driver.new(output_dir, File.read(file), file)
 
-p = Lunokhod::Parser.new(data, file)
+ok, report = driver.run
 
-p.parse
-
-ep = Lunokhod::ErrorReport.new(p.surveys)
-ep.run
-
-if ep.errors?
-  $stderr.puts ep
+if !ok
+  puts report.errors
   exit -1
 end
-
-r = Lunokhod::Resolver.new(p.surveys)
-r.run
-
-b = Lunokhod::Html::Backend.new(output_dir)
-c = Lunokhod::Compiler.new(p.surveys, b)
-c.compile
-b.write
